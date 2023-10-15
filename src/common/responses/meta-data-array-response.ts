@@ -3,7 +3,7 @@ import { DataArrayResponse } from "./data-array-response";
 export class MetaDataArrayResponse<DATA> extends DataArrayResponse<DATA> {
   private meta: metaType;
 
-  constructor(data: DATA[], meta: metaType) {
+  constructor(meta: metaType, data: DATA[]) {
     super(data);
     this.meta = meta;
   }

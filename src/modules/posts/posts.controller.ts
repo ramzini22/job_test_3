@@ -1,3 +1,4 @@
+import { PostsStorage } from './../../services/posts.storage';
 import { Controller, Get, Param, Query } from "@nestjs/common";
 import { PostsService } from "./posts.service";
 import { GetPostDto } from "./dto/responses/get-post.dto";
@@ -29,7 +30,14 @@ export class PostsController{
             throwExceptionByCustomError(errorData.getError())
         }
 
-        return new MetaDataArrayResponse(errorData.getData(), {})
+        return new MetaDataArrayResponse(
+            {
+                count: PostsStorage.getValue.length,
+                limit: query.getLimit() ?? 0,
+                offset: query.getOffset() ?? 0
+            }, 
+            errorData.getData()
+        )
     }
 
     @Get(":postId")
