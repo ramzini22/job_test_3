@@ -13,7 +13,6 @@ export class PostsService{
         q:string
     ): Promise<ErrorDataDto<GetPostDto[]>>{
         const errorData = new ErrorDataDto<GetPostDto[]>()
-        let postsEntities:PostEntity[];
 
         const postsErrorData = await this.getPostsFromStorage()
         if(postsErrorData.haveError())
