@@ -1,3 +1,5 @@
+import { Envs } from './../../../../conf/envs';
+import { useGetPosts } from './../../../../../services/useGetPosts';
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { Type } from "@nestjs/common/interfaces/type.interface";
 import { InjectOptions } from "fastify";
@@ -9,6 +11,7 @@ export class CustomBaseTest {
 
   public async build(modules: Type[]) {
 
+    await useGetPosts(Envs.UPDATE_POSTS_TIME, false)
     this.app = await BeforeAllTestingReturnMutatedApp(undefined, modules);
     return this;
   }
@@ -20,7 +23,7 @@ export class CustomBaseTest {
     },
   ): Promise<ResponseFromControllerType<T>> {
     const result = await this.app.inject({
-      url: `v1${url}`,
+      url: `${url}`,
       ...params,
       headers: {
         accept: "application/json",

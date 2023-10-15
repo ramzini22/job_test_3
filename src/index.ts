@@ -52,7 +52,7 @@ export class App {
         usePipes(this.app);
 
         // save and update posts cache
-        useGetPosts(Envs.UPDATE_POSTS_TIME)
+        await useGetPosts(Envs.UPDATE_POSTS_TIME)
 
         useContainer(this.app.select(AppModule), { fallbackOnErrors: true });
     

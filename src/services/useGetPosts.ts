@@ -3,7 +3,7 @@ import { throwExceptionByCustomError, createCustomServerErrorRaw } from './../co
 import { PostEntityType } from './../modules/posts/types/post-entity.type';
 import { PostEntity } from './../modules/posts/entities/post.entity';
 
-export const useGetPosts = async (delay:number= 5):Promise<void>=>{
+export const useGetPosts = async (delay:number= 5, repeat:boolean = true):Promise<void>=>{
 
     let postsString = '';
         let posts: PostEntityType[] = []
@@ -29,6 +29,7 @@ export const useGetPosts = async (delay:number= 5):Promise<void>=>{
             throwExceptionByCustomError(createCustomServerErrorRaw("Произошла неизвестная ошибка сервера."))
         }
 
-        setTimeout(()=>useGetPosts(), delay*1000);
+        if(repeat)
+            setTimeout(()=>useGetPosts(), delay*1000);
 
     }
