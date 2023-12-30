@@ -1,4 +1,4 @@
-import { IsInteger } from './../../decorators/is-integer.decorator';
+import { IsInteger } from "./../../decorators/is-integer.decorator";
 import { ApiProperty } from "@nestjs/swagger";
 import { QueryOffsetDto } from "./query-offset.dto";
 import { IsOptional } from "class-validator";

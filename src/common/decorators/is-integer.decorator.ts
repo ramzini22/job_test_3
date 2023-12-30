@@ -9,7 +9,7 @@ import { NumbersUtils } from "../utils/numbers.utils";
 
 export const IsInteger = (params: IsIntegerParams = {}) => {
   return applyDecorators(
-    Transform(target => isNaN(target.value) ? target.value : +target.value),
+    Transform((target) => (isNaN(target.value) ? target.value : +target.value)),
     IsInt() as PropertyDecorator,
     Min(params.min ?? NumbersUtils.INTEGER_MIN) as PropertyDecorator,
     Max(params.max ?? NumbersUtils.INTEGER_MAX) as PropertyDecorator,

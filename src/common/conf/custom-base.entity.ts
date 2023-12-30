@@ -1,8 +1,11 @@
+import { BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 
-export class CustomBaseEntity<T = number> {
+export class CustomBaseEntity<T = number> extends BaseEntity {
+  @PrimaryGeneratedColumn()
   private id: T;
 
   constructor(id: T) {
+    super();
     this.id = id;
   }
 

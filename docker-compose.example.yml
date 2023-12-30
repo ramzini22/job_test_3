@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  auth_service:
+    container_name: auth_service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    restart: unless-stopped
+    environment:
+      - PRODUCTION=true
+      - APP_PORT=$APP_PORT
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+
+  db:
+    image: postgres
+    restart: always
+    depends_on: auth_service
+    environment:
+      POSTGRES_DB: ${PG_DATABASE}
+      POSTGRES_USER: ${PG_USERNAME}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - ${PG_PORT}:${PG_PORT}
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+
+volumes:
+  local_pgdata:
+  pgadmin-data:

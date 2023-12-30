@@ -1,5 +1,3 @@
-import { Envs } from './common/conf/envs';
-import { useGetPosts } from './services/useGetPosts';
 import { NestFactory } from "@nestjs/core";
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
@@ -10,58 +8,53 @@ import { useContainer } from "class-validator";
 import { useSwagger } from "./common/conf/swagger";
 
 export class App {
-    private readonly ADDRESS: string;
-    private readonly PORT: number;
-  
-    private app: NestFastifyApplication;
-  
-    constructor(PORT: number, ADDRESS: string) {
-      this.PORT = PORT;
-      this.ADDRESS = ADDRESS;
-    }
-  
-    private static createNestApp(): Promise<NestFastifyApplication> {
-      return NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
-        bufferLogs: true,
-      });
-      }
+  private readonly ADDRESS: string;
+  private readonly PORT: number;
 
-    public async run() {
-        process.env.TZ = "UTC";
-    
-        this.app = await App.createNestApp();
-    
-        const information = await this.setUpApp();
-    
-        await this.app.listen(this.PORT, this.ADDRESS);
-    
-        await this.logInformationAfterStartServer(information);
-      }
-    
-      private async setUpApp() {
-        // Enable functional
-        await useCors(this.app);
-    
-        // FileFastifyInterceptor
-        await this.app.register(contentParser);
+  private app: NestFastifyApplication;
 
-        // Add use services
-        const swaggerInfo = await useSwagger(this.app);
+  constructor(PORT: number, ADDRESS: string) {
+    this.PORT = PORT;
+    this.ADDRESS = ADDRESS;
+  }
 
-        // Validation. Add transform
-        usePipes(this.app);
+  private static createNestApp(): Promise<NestFastifyApplication> {
+    return NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), {
+      bufferLogs: true,
+    });
+  }
 
-        // save and update posts cache
-        await useGetPosts(Envs.UPDATE_POSTS_TIME)
+  public async run() {
+    this.app = await App.createNestApp();
 
-        useContainer(this.app.select(AppModule), { fallbackOnErrors: true });
-    
-        return { swaggerInfo };
+    const information = await this.setUpApp();
 
-      }
-    
-      private async logInformationAfterStartServer(information: Record<string, string>) {
-        const url = await this.app.getUrl();
-        console.log(`Server is running on url: ${url} at ${new Date()}.`, information);
-      }
+    await this.app.listen(this.PORT, this.ADDRESS);
+
+    await this.logInformationAfterStartServer(information);
+  }
+
+  private async setUpApp() {
+    // Enable functional
+    await useCors(this.app);
+
+    // FileFastifyInterceptor
+    await this.app.register(contentParser);
+
+    // Add use services
+    const swaggerInfo = await useSwagger(this.app);
+
+    // Validation. Add transform
+    usePipes(this.app);
+
+    useContainer(this.app.select(AppModule), { fallbackOnErrors: true });
+
+    return { swaggerInfo };
+  }
+
+  private async logInformationAfterStartServer(information: Record<string, string>) {
+    const url = await this.app.getUrl();
+    // eslint-disable-next-line no-console
+    console.log(`Server is running on url: ${url} at ${new Date()}.`, information);
+  }
 }

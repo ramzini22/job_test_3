@@ -1,4 +1,8 @@
-import { createCustomErrorBadRequestRaw, createCustomInvalidInputRaw, throwInvalidInputException } from "../utils/error.utils";
+import {
+  createCustomErrorBadRequestRaw,
+  createCustomInvalidInputRaw,
+  throwInvalidInputException,
+} from "../utils/error.utils";
 
 export class ValidationExceptions {
   public static throwInvalidIdException() {
