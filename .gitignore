@@ -2,8 +2,8 @@
 /dist
 /node_modules
 
+
 # Logs
-logs
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -17,6 +17,7 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+junit.xml
 
 # IDEs and editors
 /.idea
@@ -33,3 +34,8 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# ENV
+.env
+!/src/modules/logs
+/keys
