@@ -10,22 +10,23 @@ import { writeFileSync } from "fs";
 import { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { Envs } from "./envs";
 
-const projectInfo = {
-  name: "API Documentation",
-  author: {
-    name: "Ramil",
-    url: "ramzini22",
-    email: "ramil.zinnatullin.02@mail.ru",
+const projectInfo={
+  name:"API Documentation",
+  author:{
+    name:"Ramil",
+    url:"ramzini22",
+    email:"ramil.zinnatullin.02@mail.ru"
   },
   description:
-    "Documentation was created for" +
-    "<a href='https://docs.google.com/document/d/1qL1Zsufg8dxblpj1i2EoMZ4y0M88WG9aokMYUKv5R-8/edit'>" +
-    " test's task" +
-    "</a>" +
-    "<br/>" +
-    "You can find me <a href = 'https://t.me/ramzini'>here</a>",
-  version: "0.0.1",
-};
+    "Documentation was created for"
+    +"<a href='https://docs.google.com/document/d/1qL1Zsufg8dxblpj1i2EoMZ4y0M88WG9aokMYUKv5R-8/edit'>"
+    +" test's task"
+    +"</a>"
+    +"<br/>" 
+    +"You can find me <a href = 'https://t.me/ramzini'>here</a>"
+    ,
+  version:"0.0.1"
+}
 
 export const useSwagger = async (app: NestFastifyApplication): Promise<string> => {
   const documentBuilder = new DocumentBuilder();

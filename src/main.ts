@@ -1,4 +1,4 @@
-import { Envs } from "./common/conf/envs";
+import { Envs } from './common/conf/envs';
 
 import { App } from "./index";
 

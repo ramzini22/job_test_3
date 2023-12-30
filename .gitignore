@@ -11,9 +11,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-.env
-docker-compose.*
-package-lock.json
 # OS
 .DS_Store
 
@@ -38,8 +35,6 @@ junit.xml
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Example files
-!*.example*
 # ENV
 .env
 !/src/modules/logs

@@ -17,8 +17,9 @@ export class MetaDataArrayResponse<DATA> extends DataArrayResponse<DATA> {
   }
 }
 
+
 export type metaType = Partial<{
-  count: number;
-  limit: number;
-  offset: number;
-}>;
+  count : number;
+  limit : number;
+  offset : number
+}>
